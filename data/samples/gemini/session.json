@@ -1,0 +1,9 @@
+{
+  "sessionId": "gemini-demo",
+  "projectHash": "demo-project-hash",
+  "startTime": "2026-10-23T10:00:00Z",
+  "messages": [
+    {"id": "g-user", "type": "user", "content": "Goal: improve task search."},
+    {"id": "g-assistant", "type": "gemini", "content": [{"text": "We chose a database index for task search.\nTODO: benchmark search with ten thousand tasks."}], "thoughts": [{"text": "Private reasoning must not be imported."}]}
+  ]
+}

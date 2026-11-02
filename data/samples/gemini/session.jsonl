@@ -1,0 +1,4 @@
+{"sessionId":"gemini-jsonl-demo","projectHash":"demo-project-hash","startTime":"2026-10-23T10:00:00Z"}
+{"id":"g-user","type":"user","content":"Goal: improve task search."}
+{"id":"g-assistant","type":"gemini","content":"We chose an obsolete index."}
+{"$patch":{"id":"g-assistant","content":"We chose a composite database index.\nTODO: benchmark the index."}}

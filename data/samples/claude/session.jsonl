@@ -1,0 +1,2 @@
+{"type":"user","uuid":"c-user","parentUuid":null,"sessionId":"claude-demo","cwd":"/demo/task-api","message":{"role":"user","content":"Goal: add task notifications."}}
+{"type":"assistant","uuid":"c-assistant","parentUuid":"c-user","sessionId":"claude-demo","message":{"role":"assistant","content":[{"type":"thinking","thinking":"Private reasoning must not be imported."},{"type":"text","text":"We decided to send notifications after the transaction commits.\nTODO: add a retry test for failed email delivery."}]}}

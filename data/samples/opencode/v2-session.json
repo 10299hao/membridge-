@@ -1,0 +1,19 @@
+{
+  "info": {
+    "id": "ses_membridge_demo_v2",
+    "title": "Task API persistence and unfinished pagination",
+    "time": {"created": 1792454400000},
+    "location": {"directory": "/demo/task-api"}
+  },
+  "messages": [
+    {"id": "msg_goal", "type": "user", "time": {"created": 1792454400000}, "text": "Goal: build a task API. We prefer pytest for backend tests. Never commit credentials."},
+    {"id": "msg_decision", "type": "assistant", "content": [
+      {"type": "text", "text": "We chose Postgres for concurrent writes and transaction support.\nCreated src/db.py with a pooled database connection.\nUpdated src/tasks.py to persist tasks."},
+      {"type": "reasoning", "text": "Private reasoning must not be imported."}
+    ]},
+    {"id": "msg_todo", "type": "assistant", "content": [
+      {"type": "text", "text": "TODO: add cursor pagination to GET /tasks.\nNext step: write an integration test for duplicate task IDs.\nConstraint: keep the existing /tasks response fields stable."}
+    ]},
+    {"id": "msg_idle", "type": "idle", "outcome": "success"}
+  ]
+}

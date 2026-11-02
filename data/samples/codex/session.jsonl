@@ -1,0 +1,5 @@
+{"timestamp":"2026-10-23T10:00:00Z","type":"session_meta","payload":{"id":"codex-demo","cwd":"/demo/task-api","timestamp":"2026-10-23T10:00:00Z","base_instructions":"Internal instructions must not be imported."}}
+{"timestamp":"2026-10-23T10:01:00Z","type":"response_item","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"Goal: finish the task API."}]}}
+{"timestamp":"2026-10-23T10:02:00Z","type":"response_item","payload":{"type":"reasoning","summary":[{"text":"Private reasoning must not be imported."}]}}
+{"timestamp":"2026-10-23T10:03:00Z","type":"response_item","payload":{"type":"message","role":"assistant","content":[{"type":"output_text","text":"We chose cursor pagination for stable results.\nUpdated src/tasks.py to add pagination.\nTODO: add a regression test for an expired cursor."}]}}
+{"timestamp":"2026-10-23T10:03:00Z","type":"event_msg","payload":{"type":"agent_message","message":"Duplicate event must not be imported."}}

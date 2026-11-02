@@ -1,0 +1,7 @@
+{
+  "session_id": "deepseek-demo",
+  "messages": [
+    {"role": "user", "content": "Goal: add task caching."},
+    {"role": "assistant", "content": "We chose a short cache expiration. TODO: test cache invalidation.", "reasoning_content": "Private reasoning must not be imported."}
+  ]
+}

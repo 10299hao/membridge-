@@ -1,0 +1,67 @@
+name: membridge
+x-runtime: &runtime
+  image: membridge:local
+  build: .
+  restart: unless-stopped
+  init: true
+x-environment: &environment
+  MEMBRIDGE_DATABASE_URL: postgresql+psycopg://membridge:${POSTGRES_PASSWORD:?Run scripts/configure.ps1 first}@postgres:5432/membridge
+  MEMBRIDGE_API_KEY: ${MEMBRIDGE_API_KEY:?Run scripts/configure.ps1 first}
+  MEMBRIDGE_LLM_URL: ${MEMBRIDGE_LLM_URL:-}
+  MEMBRIDGE_LLM_KEY: ${MEMBRIDGE_LLM_KEY:-}
+  MEMBRIDGE_LLM_MODEL: ${MEMBRIDGE_LLM_MODEL:-}
+  MEMBRIDGE_EMBEDDING_MODEL: ${MEMBRIDGE_EMBEDDING_MODEL:-}
+services:
+  postgres:
+    image: pgvector/pgvector:pg17
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: membridge
+      POSTGRES_USER: membridge
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run scripts/configure.ps1 first}
+    volumes:
+      - memory-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U membridge -d membridge']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  gateway:
+    <<: *runtime
+    environment:
+      <<: *environment
+      MEMBRIDGE_INGESTION_URL: http://ingestion:8000
+      MEMBRIDGE_AI_URL: http://ai:8000
+    ports:
+      - '127.0.0.1:8000:8000'
+    depends_on:
+      postgres: {condition: service_healthy}
+      ingestion: {condition: service_healthy}
+      ai: {condition: service_healthy}
+    healthcheck: &healthcheck
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health/ready')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  ingestion:
+    <<: *runtime
+    command: [membridge, serve, ingestion, --host, 0.0.0.0]
+    environment: *environment
+    healthcheck: *healthcheck
+  ai:
+    <<: *runtime
+    command: [membridge, serve, ai, --host, 0.0.0.0]
+    environment: *environment
+    healthcheck: *healthcheck
+  worker:
+    <<: *runtime
+    command: [membridge, worker]
+    environment:
+      <<: *environment
+      MEMBRIDGE_AI_URL: http://ai:8000
+    depends_on:
+      postgres: {condition: service_healthy}
+      gateway: {condition: service_healthy}
+      ai: {condition: service_healthy}
+volumes:
+  memory-data:

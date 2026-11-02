@@ -1,0 +1,12 @@
+{
+  "info": {"id": "ses_membridge_demo_legacy", "title": "Legacy export", "time": {"created": 1792454400000}},
+  "messages": [
+    {"info": {"id": "msg_legacy_user", "role": "user", "time": {"created": 1792454400000}}, "parts": [
+      {"type": "text", "text": "Goal: support older OpenCode exports."}
+    ]},
+    {"info": {"id": "msg_legacy_assistant", "role": "assistant"}, "parts": [
+      {"type": "text", "text": "We decided to preserve message IDs as evidence.\nTODO: verify handoffs in a new Codex session."},
+      {"type": "tool", "tool": "edit", "state": {"status": "completed", "input": {"filePath": "src/parser.py"}, "output": "updated parser"}}
+    ]}
+  ]
+}
